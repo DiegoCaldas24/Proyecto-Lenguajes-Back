@@ -5,8 +5,9 @@
      --color-success: #10b981;
      /* Verde para acción principal/Entrada */
      --color-secondary: #3b82f6;
+     --color-danger: #ef4444;
      /* Azul claro para acción secundaria/Salida */
-     color: var(--color-text-dark);
+     color: var(--color-danger);
      margin-bottom: 24px;
      background-color: #ffffff;
      padding: 10px 20px;

@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org"
-    th:replace="~{/fragments/layout :: layout(~{::title},~{::main},'attendance')}">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" th:replace="~{/fragments/layout :: layout(~{::title},~{::main},'attendance',~{::script})}">
 <head>
     <title>Registro de Asistencia</title>
-
 </head>
 <body>
-    <main>
-        <div class="attendance-card">
+    <main style="width: 90vw">
+        <div class="attendance-card" style="margin: 10% 20%">
             <!-- Reloj Digital -->
             <div id="clock" class="clock-display">00:00:00</div>
 
@@ -45,6 +43,6 @@
             </button>
         </div>
     </main>
-    <script th:src="@{/scripts/attendance.js}" ></script>
+    <script th:src="@{/scripts/attendance.js}"></script>
 </body>
 </html>

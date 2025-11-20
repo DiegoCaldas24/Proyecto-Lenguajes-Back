@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/fragments/layout :: layout(~{::title},~{::main},'employees',~{::script})}" >
+<head>
+    <title>Empleados</title>
+</head>
+<body>
+<!-- 2. Contenido Principal -->
+<main class="main-content">
+    <header class="header">
+        <h2 style="font-size: 1.25rem; font-weight: 600; color: var(--color-text-dark);">Gestión de Empleados</h2>
+        <div style="display: flex; align-items: center; gap: 16px;">
+            <span style="color: var(--color-text-medium); font-size: 0.875rem; display: none;">Hola, Juan Pérez</span>
+            <div class="user-avatar">JP</div>
+        </div>
+    </header>
+
+    <!-- 2.2 Área de Scroll para el Contenido -->
+    <div class="content-area">
+
+        <!-- Sección Principal de Gestión de Empleados -->
+        <section class="management-section">
+            <div class="management-header">
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--color-text-dark); margin: 0;">Lista de Empleados</h3>
+                <button class="btn-add" id="btnAddEmployee">
+                    <!-- Icono Más -->
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                    Nuevo Empleado
+                </button>
+            </div>
+
+            <!-- Tabla de Empleados -->
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Puesto</th>
+                        <th>Departamento</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody id="employeeTableBody">
+                    <!-- Los datos de los empleados se insertarán aquí por JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+    <!-- 3. Modal para Agregar/Editar Empleado -->
+    <div id="employeeModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('employeeModal')">&times;</span>
+            <h2 id="modalTitle" style="font-size: 1.5rem; font-weight: 700; color: var(--color-primary); margin-bottom: 20px;">Agregar Empleado</h2>
+
+            <form id="employeeForm" class="modal-form">
+                <input type="hidden" id="employeeIdField">
+
+                <div>
+                    <label for="employeeName">Nombre Completo</label>
+                    <input type="text" id="employeeName" placeholder="Ej: Ana Gutiérrez" required>
+                </div>
+
+                <div>
+                    <label for="employeePosition">Puesto</label>
+                    <input type="text" id="employeePosition" placeholder="Ej: Desarrollador Senior" required>
+                </div>
+
+                <div>
+                    <label for="employeeDept">Departamento</label>
+                    <select id="employeeDept" required>
+                        <option value="">Seleccione un departamento</option>
+                        <option value="Ventas">Ventas</option>
+                        <option value="Desarrollo">Desarrollo</option>
+                        <option value="Administracion">Administración</option>
+                        <option value="Recursos Humanos">Recursos Humanos</option>
+                        <option value="Marketing">Marketing</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-save" id="btnSaveEmployee">Guardar Empleado</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 4. Modal de Confirmación para Eliminar -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('confirmModal')">&times;</span>
+            <h2 style="font-size: 1.5rem; font-weight: 700; color: var(--color-danger); margin-bottom: 10px;">Confirmar Eliminación</h2>
+            <p>¿Está seguro de que desea eliminar a este empleado de forma permanente?</p>
+            <div class="confirm-actions">
+                <button class="btn-cancel" onclick="closeModal('confirmModal')">Cancelar</button>
+                <button class="btn-confirm-delete" id="btnConfirmDelete">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<script th:src="@{/scripts/employees.js}"></script>
+</body>
+</html>

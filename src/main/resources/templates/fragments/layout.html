@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org" th:fragment="layout(title,content,active)">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" th:fragment="layout(title,content,active,script)">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,9 +9,11 @@
     <link rel="stylesheet" th:href="@{/styles/dashboard.css}">
     <link rel="stylesheet" th:href="@{/styles/navbar.css}">
     <link rel="stylesheet" th:href="@{/styles/attendance.css}">
+    <link rel="stylesheet" th:href="@{/styles/employees.css}">
 </head>
 <body>
     <div th:replace="~{/fragments/navbar :: navbar(${active})}"></div>
     <div th:replace="${content}"></div>
+<th:block th:replace="${script}"></th:block>
 </body>
 </html>
