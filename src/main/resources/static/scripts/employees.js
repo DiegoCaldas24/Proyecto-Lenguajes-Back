@@ -2,7 +2,7 @@
 const employeeTableBody = document.getElementById('employeeTableBody');
 const employeeModal = document.getElementById('employeeModal');
 const confirmModal = document.getElementById('confirmModal');
-const employeeForm = document.getElementById('employeeForm');
+//const employeeForm = document.getElementById('employeeForm');
 const modalTitle = document.getElementById('modalTitle');
 const employeeIdField = document.getElementById('employeeIdField');
 const employeeNameInput = document.getElementById('employeeName');
@@ -20,10 +20,10 @@ function getEmployees() {
     return data ? JSON.parse(data) : [];
 }
 
-function saveEmployees(employees) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(employees));
-    renderEmployees(); // Volver a renderizar la tabla después de guardar
-}
+//function saveEmployees(employees) {
+//    localStorage.setItem(STORAGE_KEY, JSON.stringify(employees));
+    // renderEmployees(); // Volver a renderizar la tabla después de guardar
+//}
 
 // Función para generar un ID único simple (simulación)
 function generateUniqueId() {
@@ -59,7 +59,7 @@ function renderEmployees() {
 
 // Crear/Actualizar Empleado
 function saveEmployee(event) {
-    event.preventDefault();
+    //event.preventDefault();
 
     const employees = getEmployees();
     const id = employeeIdField.value;
@@ -89,22 +89,10 @@ function saveEmployee(event) {
 }
 
 // Editar (Cargar datos en el formulario)
-function editEmployee(id) {
-    const employees = getEmployees();
-    const employee = employees.find(emp => emp.id === id);
-
-    if (employee) {
-        // Llenar el formulario
-        employeeIdField.value = employee.id;
-        employeeNameInput.value = employee.name;
-        employeePositionInput.value = employee.position;
-        employeeDeptSelect.value = employee.department;
-
-        // Actualizar el título del modal
-        modalTitle.textContent = 'Editar Empleado';
-
-        showModal('employeeModal');
-    }
+function editEmployee(button) {
+    const id = button.dataset.id;
+    modalTitle.textContent = 'Editar Empleado';
+    showModal('employeeModal');
 }
 
 // Eliminar (Delete - Lógica)
@@ -148,7 +136,7 @@ function showDeleteConfirm(id) {
 
 // --- Event Listeners ---
 document.getElementById('btnAddEmployee').addEventListener('click', setupAddModal);
-employeeForm.addEventListener('submit', saveEmployee);
+//employeeForm.addEventListener('submit', saveEmployee);
 btnConfirmDelete.addEventListener('click', deleteEmployee);
 
 // Cerrar modal al hacer clic fuera
@@ -162,6 +150,7 @@ window.onclick = function(event) {
 }
 
 // Inicialización: Cargar la lista de empleados al cargar la página
+/*
 window.onload = function() {
     // Datos de ejemplo para empezar si el localStorage está vacío
     if (getEmployees().length === 0) {
@@ -175,7 +164,7 @@ window.onload = function() {
         renderEmployees();
     }
 };
-
+*/
 // Función de alerta personalizada (Para reemplazar window.alert)
 function alert(message) {
     const existingModal = document.querySelector('.custom-alert-modal');

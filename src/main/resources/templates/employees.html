@@ -27,56 +27,93 @@
                     Nuevo Empleado
                 </button>
             </div>
-
             <!-- Tabla de Empleados -->
             <div class="table-container">
                 <table class="data-table">
                     <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Puesto</th>
-                        <th>Departamento</th>
-                        <th>Acciones</th>
-                    </tr>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Puesto</th>
+                            <th>Departamento</th>
+                            <th>Correo</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
                     </thead>
                     <tbody id="employeeTableBody">
-                    <!-- Los datos de los empleados se insertarán aquí por JS -->
+                        <tr th:each="employee : ${employees}">
+                            <td th:text="${employee.getDni()}"></td>
+                            <td th:text="${employee.getNames()}"></td>
+                            <td th:text="${employee.getPosition()}"></td>
+                            <td th:text="${employee.department.code}"></td>
+                            <td th:text="${employee.getEmail()}"></td>
+                            <td th:text="${employee.getStatus()}"></td>
+                            <td class="action-buttons">
+                                <button class="btn-edit"
+                                        data-id="${employee.getIdEmployee()}"
+                                        onclick="editEmployee(this)">
+                                    Editar
+                                </button>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
         </section>
     </div>
+
     <!-- 3. Modal para Agregar/Editar Empleado -->
     <div id="employeeModal" class="modal">
         <div class="modal-content">
             <span class="close-button" onclick="closeModal('employeeModal')">&times;</span>
             <h2 id="modalTitle" style="font-size: 1.5rem; font-weight: 700; color: var(--color-primary); margin-bottom: 20px;">Agregar Empleado</h2>
 
-            <form id="employeeForm" class="modal-form">
+            <form id="employeeForm" class="modal-form"
+                  method="post"
+                  th:action="@{/employees/save}"
+                  th:object="${employee}">
                 <input type="hidden" id="employeeIdField">
+                    <div>
+                       <label for="names">Nombres</label>
+                       <input type="text" th:field="*{names}" id="names" placeholder="Ej: Ana" required>
+                    </div>
 
-                <div>
-                    <label for="employeeName">Nombre Completo</label>
-                    <input type="text" id="employeeName" placeholder="Ej: Ana Gutiérrez" required>
-                </div>
+                   <div>
+                       <label for="lastName">Apellidos</label>
+                       <input type="text" th:field="*{lastName}" id="lastName" placeholder="Ej: Gutierrez" required>
+                   </div>
 
-                <div>
-                    <label for="employeePosition">Puesto</label>
-                    <input type="text" id="employeePosition" placeholder="Ej: Desarrollador Senior" required>
-                </div>
+                   <div>
+                       <label for="dni">DNI</label>
+                       <input type="number" th:field="*{dni}" id="dni" placeholder="Ej: 57612512" required>
+                   </div>
 
-                <div>
-                    <label for="employeeDept">Departamento</label>
-                    <select id="employeeDept" required>
-                        <option value="">Seleccione un departamento</option>
-                        <option value="Ventas">Ventas</option>
-                        <option value="Desarrollo">Desarrollo</option>
-                        <option value="Administracion">Administración</option>
-                        <option value="Recursos Humanos">Recursos Humanos</option>
-                        <option value="Marketing">Marketing</option>
-                    </select>
-                </div>
+                   <div>
+                       <label for="email">Email</label>
+                       <input type="email" th:field="*{email}" id="email" placeholder="Ej: ejemplo@gmail.com" required>
+                   </div>
+
+                   <div>
+                       <label for="position">Puesto</label>
+                       <input type="text" th:field="*{position}" id="position" placeholder="Ej: Desarrollador Senior" required>
+                   </div>
+
+                    <div>
+                        <label for="salary">Salario</label>
+                        <input type="text" th:field="*{salary}" id="salary" placeholder="Ej: 230.34" required>
+                    </div>
+
+                   <div>
+                       <label for="employeeDept">Departamento</label>
+                       <select id="employeeDept" th:field="*{department.idDepartment}" required>
+                           <option th:each="department : ${departments}"
+                                   th:text="${department.getName()}"
+                                   th:value="${department.getIdDepartment()}">
+                           </option>
+                       </select>
+                   </div>
+
 
                 <button type="submit" class="btn-save" id="btnSaveEmployee">Guardar Empleado</button>
             </form>

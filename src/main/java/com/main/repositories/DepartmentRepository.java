@@ -2,18 +2,16 @@ package com.main.repositories;
 
 import com.main.models.DepartmentModel;
 import jakarta.transaction.Transactional;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import org.springframework.data.jpa.repository.JpaRepository;
-import com.main.models.EmployeesModel;
 
 import java.util.List;
 
-
 @Repository
-public interface EmployeesRepository extends JpaRepository<EmployeesModel, Integer> {
-    List<EmployeesModel> findAll();
+public interface DepartmentRepository extends JpaRepository<DepartmentModel, Integer> {
+    List<DepartmentModel> findAll();
 
-    <S extends EmployeesModel> S save(S employee);
+
 }
