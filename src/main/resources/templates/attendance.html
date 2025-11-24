@@ -5,44 +5,43 @@
 </head>
 <body>
     <main style="width: 90vw">
+        <!-- Popup -->
+        <div id="popup" class="popup-container" th:if="${message}">
+            <div class="popup-box">
+                <p th:text="${message}"></p>
+            </div>
+        </div>
+
         <div class="attendance-card" style="margin: 10% 20%">
             <!-- Reloj Digital -->
             <div id="clock" class="clock-display">00:00:00</div>
 
             <h1 class="title">Registro de Asistencia</h1>
-            <p class="subtitle">Selecciona la acción e ingresa tu número de empleado.</p>
+            <p class="subtitle">Ingresa tu DNI para registrar tu entrada o salida</p>
 
-            <!-- Selector de Entrada / Salida -->
-            <div class="mode-selector">
-                <button id="btnEntrada" class="mode-button mode-button-entrada active active-entrada">
-                    <!-- Icono Flecha Derecha (Entrada) -->
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M13 9l3 3m0 0l-3 3m3-3H8m5 0c0 4.418-3.582 8-8 8s-8-3.582-8-8 3.582-8 8-8 8 3.582 8 8z">
-                        </path>
-                    </svg>
-                    Registrar Entrada
+            <form method="post" th:action="@{/registerAttendance/attendance}">
+                <!-- Input de Empleado -->
+                <input type="text" id="employeeId" name="dni" class="employee-input" minlength="8" maxlength="8" placeholder="No. de DNI del Empleado" required>
+                <!-- Botón de Acción Principal -->
+                <button id="actionButton" class="action-button button-entrada">
+                    Registrar
                 </button>
-                <button id="btnSalida" class="mode-button mode-button-salida">
-                    <!-- Icono Flecha Izquierda (Salida) -->
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M11 15l-3-3m0 0l3-3m-3 3h8m5 0c0 4.418-3.582 8-8 8s-8-3.582-8-8 3.582-8 8-8 8 3.582 8 8z">
-                        </path>
-                    </svg>
-                    Registrar Salida
-                </button>
-            </div>
+            </form>
 
-            <!-- Input de Empleado -->
-            <input type="number" id="employeeId" class="employee-input" placeholder="No. de Empleado" required>
-
-            <!-- Botón de Acción Principal -->
-            <button id="actionButton" class="action-button button-entrada">
-                Registrar Entrada
-            </button>
         </div>
     </main>
     <script th:src="@{/scripts/attendance.js}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const popup = document.getElementById("popup");
+
+            if (popup) {
+                popup.style.display = "flex"; // Asegura que se muestre
+                setTimeout(() => {
+                    popup.style.display = "none";
+                }, 3000);
+            }
+        });
+    </script>
 </body>
 </html>

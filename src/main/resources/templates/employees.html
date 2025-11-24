@@ -86,7 +86,7 @@
 
                    <div>
                        <label for="dni">DNI</label>
-                       <input type="number" th:field="*{dni}" id="dni" placeholder="Ej: 57612512" required>
+                       <input type="number" th:field="*{dni}" id="dni" placeholder="Ej: 57612512" min="8" max="8" required>
                    </div>
 
                    <div>
@@ -101,7 +101,7 @@
 
                     <div>
                         <label for="salary">Salario</label>
-                        <input type="text" th:field="*{salary}" id="salary" placeholder="Ej: 230.34" required>
+                        <input type="text" th:field="*{salary}" id="salary" placeholder="Ej: 230.34" min="1" required>
                     </div>
 
                    <div>
