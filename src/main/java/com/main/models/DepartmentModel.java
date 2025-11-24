@@ -1,5 +1,6 @@
 package com.main.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,5 +28,6 @@ public class DepartmentModel {
     private String code;
 
     @OneToMany(mappedBy = "department")
+    @JsonIgnore
     private List<EmployeesModel> employees;
 }

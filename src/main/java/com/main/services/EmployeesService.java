@@ -26,7 +26,7 @@ public class EmployeesService{
         employeesRepository.save(employeesModel);
     }
 
-    public Optional<EmployeesModel> getEmployee(String dniEmployee){
-        return  employeesRepository.findByDni(dniEmployee);
+    public Optional<EmployeesModel> getEmployee(int idEmployee){
+        return employeesRepository.findByIdEmployee(idEmployee);
     }
 }

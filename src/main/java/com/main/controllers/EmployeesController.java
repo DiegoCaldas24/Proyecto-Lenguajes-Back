@@ -40,10 +40,17 @@ public class EmployeesController {
             RedirectAttributes redirectAttributes){
         try{
             employeesService.saveEmployee(employeesModel);
-            redirectAttributes.addFlashAttribute("success", "Se realizo correctamente la accion");
+            redirectAttributes.addFlashAttribute("message", "Se realizo correctamente la accion");
         }catch (Exception e){
-            redirectAttributes.addFlashAttribute("error", "Error en la accion");
+            redirectAttributes.addFlashAttribute("message", "Error en la accion");
         }
         return "redirect:/employees";
+    }
+
+    @GetMapping("/employee/{idEmployee}")
+    @ResponseBody
+    public EmployeesModel getEmployee(
+            @PathVariable int idEmployee){
+        return employeesService.getEmployee(idEmployee).orElse(null);
     }
 }

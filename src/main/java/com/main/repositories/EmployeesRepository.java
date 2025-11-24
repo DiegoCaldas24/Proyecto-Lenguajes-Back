@@ -17,6 +17,7 @@ public interface EmployeesRepository extends JpaRepository<EmployeesModel, Integ
     List<EmployeesModel> findAll();
 
     Optional<EmployeesModel> findByDni(String dniEmployee);
+    Optional<EmployeesModel> findByIdEmployee(int idEmployee);
 
     <S extends EmployeesModel> S save(S employee);
 }

@@ -14,6 +14,13 @@
         </div>
     </header>
 
+    <!-- Popup -->
+    <div id="popup" class="popup-container" th:if="${message}">
+        <div class="popup-box">
+            <p th:text="${message}"></p>
+        </div>
+    </div>
+
     <!-- 2.2 Área de Scroll para el Contenido -->
     <div class="content-area">
 
@@ -51,8 +58,7 @@
                             <td th:text="${employee.getStatus()}"></td>
                             <td class="action-buttons">
                                 <button class="btn-edit"
-                                        data-id="${employee.getIdEmployee()}"
-                                        onclick="editEmployee(this)">
+                                        th:attr="data-id=${employee.getIdEmployee()}">
                                     Editar
                                 </button>
                             </td>
@@ -73,7 +79,7 @@
                   method="post"
                   th:action="@{/employees/save}"
                   th:object="${employee}">
-                <input type="hidden" id="employeeIdField">
+                <input type="hidden" id="employeeIdField" th:field="*{idEmployee}">
                     <div>
                        <label for="names">Nombres</label>
                        <input type="text" th:field="*{names}" id="names" placeholder="Ej: Ana" required>
@@ -86,7 +92,7 @@
 
                    <div>
                        <label for="dni">DNI</label>
-                       <input type="number" th:field="*{dni}" id="dni" placeholder="Ej: 57612512" min="8" max="8" required>
+                       <input type="text" th:field="*{dni}" id="dni" placeholder="Ej: 57612512" minlength="8" maxlength="8" required>
                    </div>
 
                    <div>
@@ -104,6 +110,14 @@
                         <input type="text" th:field="*{salary}" id="salary" placeholder="Ej: 230.34" min="1" required>
                     </div>
 
+                <div>
+                    <label for="status">Estado</label>
+                    <select id="status" th:field="*{status}" required>
+                        <option value="ACTIVO">ACTIVO</option>
+                        <option value="INACTIVO">INACTIVO</option>
+                        <option value="SUSPENDIDO">SUSPENDIDO</option>
+                    </select>
+                </div>
                    <div>
                        <label for="employeeDept">Departamento</label>
                        <select id="employeeDept" th:field="*{department.idDepartment}" required>
@@ -119,22 +133,21 @@
             </form>
         </div>
     </div>
-
-    <!-- 4. Modal de Confirmación para Eliminar -->
-    <div id="confirmModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button" onclick="closeModal('confirmModal')">&times;</span>
-            <h2 style="font-size: 1.5rem; font-weight: 700; color: var(--color-danger); margin-bottom: 10px;">Confirmar Eliminación</h2>
-            <p>¿Está seguro de que desea eliminar a este empleado de forma permanente?</p>
-            <div class="confirm-actions">
-                <button class="btn-cancel" onclick="closeModal('confirmModal')">Cancelar</button>
-                <button class="btn-confirm-delete" id="btnConfirmDelete">Eliminar</button>
-            </div>
-        </div>
-    </div>
 </main>
 
 
 <script th:src="@{/scripts/employees.js}"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const popup = document.getElementById("popup");
+
+        if (popup) {
+            popup.style.display = "flex"; // Asegura que se muestre
+            setTimeout(() => {
+                popup.style.display = "none";
+            }, 3000);
+        }
+    });
+</script>
 </body>
 </html>
