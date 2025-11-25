@@ -32,6 +32,7 @@ public class DashboardController {
         model.addAttribute("attendanceMid", attendanceService.getCountAttendaceMid());
         model.addAttribute("attendanceBad", attendanceService.getCountAttendaceBad());
         model.addAttribute("userName", userLoged.getEmployee().getNames());
+        model.addAttribute("userRol", userLoged.getRol());
         return "dashboard";
     }
 }

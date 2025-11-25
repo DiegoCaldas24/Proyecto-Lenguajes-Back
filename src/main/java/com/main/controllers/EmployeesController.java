@@ -37,8 +37,9 @@ public class EmployeesController {
         model.addAttribute("employee", new EmployeesModel());
         // Envia toda la data de los departamentos para que se usen dentro del form
         model.addAttribute("departments", departmentService.getAllDepartments());
-
+        // Envia el nombre del usuario logeado
         model.addAttribute("userName", userLoged.getEmployee().getNames());
+        model.addAttribute("userRol", userLoged.getRol());
 
         return "employees";
     }

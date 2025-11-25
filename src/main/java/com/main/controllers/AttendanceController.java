@@ -1,9 +1,13 @@
 package com.main.controllers;
 
+import com.main.models.UserModel;
+import com.main.security.UserDetails;
 import com.main.services.AttendanceService;
 import com.main.services.EmployeesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,14 +28,19 @@ public class AttendanceController {
     }
 
     @GetMapping
-    public String register() {
+    public String register(Model model, @AuthenticationPrincipal UserDetails userDetails) {
+        if (userDetails != null) {
+            UserModel userLoged = userDetails.getUserModel();
+            model.addAttribute("userRol", userLoged.getRol());
+        }
         return "attendance";
     }
 
     @PostMapping("/attendance")
     public String saveEntryDate(
             @RequestParam("dni") String dniEmployee,
-            RedirectAttributes redirectAttributes) {
+            RedirectAttributes redirectAttributes, UserDetails authenticatedPrincipal) {
+
         if (attendanceService.saveAttendance(dniEmployee)) {
             redirectAttributes.addFlashAttribute("message", "Se marco el registro correctamente");
         } else {

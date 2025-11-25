@@ -29,9 +29,9 @@ public class SecurityConfig {
                         .loginPage("/login")
                         .usernameParameter("email")
                         .passwordParameter("password")
-                        .defaultSuccessUrl("/dashboard")
+                        .defaultSuccessUrl("/dashboard", true)
                 )
-                .logout(logout -> logout.logoutSuccessUrl("/login"));
+                .logout(logout -> logout.logoutSuccessUrl("/login?logout"));
         return http.build();
     }
 
