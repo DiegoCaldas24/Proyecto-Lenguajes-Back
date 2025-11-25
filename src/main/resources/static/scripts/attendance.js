@@ -18,3 +18,13 @@ function updateClock() {
 // Iniciar el reloj inmediatamente y luego cada segundo
 updateClock();
 setInterval(updateClock, 1000);
+
+document.getElementById("employeeId").addEventListener("input", function () {
+    if (this.value.length === 8) {
+        document.getElementById("employeeForm").submit();
+    }
+});
+
+window.onload = function () {
+    document.getElementById("employeeId").focus()
+}

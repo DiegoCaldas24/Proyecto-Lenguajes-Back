@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EmployeesService{
+public class EmployeesService {
 
     private final EmployeesRepository employeesRepository;
 
@@ -18,15 +18,23 @@ public class EmployeesService{
         this.employeesRepository = employeesRepository;
     }
 
-    public List<EmployeesModel> getAllEmployess(){
+    public List<EmployeesModel> getAllEmployess() {
         return employeesRepository.findAll();
     }
 
-    public void saveEmployee(EmployeesModel employeesModel){
+    public List<EmployeesModel> filterEmployees(String status) {
+        return employeesRepository.findEmployeesModelByStatus(status);
+    }
+
+    public void saveEmployee(EmployeesModel employeesModel) {
         employeesRepository.save(employeesModel);
     }
 
-    public Optional<EmployeesModel> getEmployee(int idEmployee){
+    public Optional<EmployeesModel> getEmployee(int idEmployee) {
         return employeesRepository.findByIdEmployee(idEmployee);
+    }
+
+    public int countEmployees() {
+        return employeesRepository.countAllEmployees();
     }
 }

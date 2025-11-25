@@ -21,8 +21,16 @@ public interface AttendanceRepository extends JpaRepository<AttendanceModel, Int
 
     Optional<AttendanceModel> findByEmployees_Dni(String dniEmployee);
 
-    @Transactional
-    @Modifying
-    @Query(value = "UPDATE attendances a SET a.departure_date = :departureDate WHERE a.id_employee = :idEmployee", nativeQuery = true)
-    void saveDepartureDate(@Param("departureDate") LocalDateTime departureDate, @Param("idEmployee") int idEmployee);
+    Optional<AttendanceModel> findByEmployees_IdEmployeeAndEntryDate(int idEmployee, LocalDateTime entryDate);
+
+    List<AttendanceModel> findAll();
+
+    @Query("SELECT COUNT(a.status) FROM AttendanceModel a WHERE a.status = 'TEMPRANO'")
+    int countStatusWell();
+
+    @Query("SELECT COUNT(a.status) FROM AttendanceModel a WHERE a.status = 'TARDE'")
+    int countStatusMid();
+
+    @Query("SELECT COUNT(a.status) FROM AttendanceModel a WHERE a.status = 'FALTA'")
+    int countStatusBad();
 }

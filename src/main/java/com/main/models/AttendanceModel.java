@@ -30,6 +30,9 @@ public class AttendanceModel {
     @Column(name = "departure_date")
     private LocalDateTime departureDate;
 
+    @Column(name = "status_exit")
+    private String statusExit;
+
     @Column(name = "status")
     private String status;
 
