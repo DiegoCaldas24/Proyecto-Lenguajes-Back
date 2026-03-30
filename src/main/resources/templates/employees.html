@@ -22,10 +22,8 @@
         </div>
     </div>
 
-    <!-- 2.2 Área de Scroll para el Contenido -->
     <div class="content-area">
 
-        <!-- Sección Principal de Gestión de Empleados -->
         <section class="management-section">
             <div class="management-header">
                 <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--color-text-dark); margin: 0;">Lista de
@@ -49,7 +47,6 @@
                     </button>
                 </div>
             </div>
-            <!-- Tabla de Empleados -->
             <div class="table-container">
                 <span style="padding: 5px" th:if="${employees.isEmpty()}">No hay trabajadores inactivos</span>
                 <table class="data-table">
@@ -85,7 +82,6 @@
         </section>
     </div>
 
-    <!-- 3. Modal para Agregar/Editar Empleado -->
     <div id="employeeModal" class="modal">
         <div class="modal-content">
             <span class="close-button" onclick="closeModal('employeeModal')">&times;</span>
@@ -162,7 +158,7 @@
         const popup = document.getElementById("popup");
 
         if (popup) {
-            popup.style.display = "flex"; // Asegura que se muestre
+            popup.style.display = "flex";
             setTimeout(() => {
                 popup.style.display = "none";
             }, 1500);

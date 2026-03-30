@@ -32,9 +32,9 @@ public class AdminInitializer implements CommandLineRunner {
                     .estatus(true)
                     .build();
             userRepository.save(admin);
-            System.out.println("✅ Usuario ADMINISTRADOR creado con éxito.");
+            System.out.println(" Usuario ADMINISTRADOR creado con éxito.");
         } else {
-            System.out.println("ℹ️ Usuario ADMINISTRADOR ya existe.");
+            System.out.println("️ Usuario ADMINISTRADOR ya existe.");
         }
 
     }

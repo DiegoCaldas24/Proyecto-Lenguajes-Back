@@ -31,13 +31,13 @@ public class EmployeesController {
     public String employees(Model model, @AuthenticationPrincipal UserDetails user) {
         UserModel userLoged = user.getUserModel();
 
-        // Envia toda la data de los empleados
+
         model.addAttribute("employees", employeesService.filterEmployees("ACTIVO"));
-        // Envia solo un objeto de tipo employee para que se use posteriormente en el form
+
         model.addAttribute("employee", new EmployeesModel());
-        // Envia toda la data de los departamentos para que se usen dentro del form
+
         model.addAttribute("departments", departmentService.getAllDepartments());
-        // Envia el nombre del usuario logeado
+
         model.addAttribute("userName", userLoged.getEmployee().getNames());
         model.addAttribute("userRol", userLoged.getRol());
 
@@ -46,11 +46,11 @@ public class EmployeesController {
 
     @GetMapping("/inactives")
     public String employeesFilter(Model model) {
-        // Envia toda la data de los empleados
+
         model.addAttribute("employees", employeesService.filterEmployees("INACTIVO"));
-        // Envia solo un objeto de tipo employee para que se use posteriormente en el form
+
         model.addAttribute("employee", new EmployeesModel());
-        // Envia toda la data de los departamentos para que se usen dentro del form
+        
         model.addAttribute("departments", departmentService.getAllDepartments());
 
         return "employees";

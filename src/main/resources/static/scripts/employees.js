@@ -1,15 +1,11 @@
-// --- Variables DOM ---
 const employeeModal = document.getElementById('employeeModal');
 const confirmModal = document.getElementById('confirmModal');
 const modalTitle = document.getElementById('modalTitle');
 const employeeIdField = document.getElementById('employeeIdField');
 
 
-// --- Funciones de Utilidad (localStorage para simular DB) ---
 const STORAGE_KEY = 'hr_manager_employees';
 
-
-// --- Funciones de Modal ---
 
 function showModal(id) {
     document.getElementById(id).style.display = 'block';
@@ -19,13 +15,13 @@ function closeModal(id) {
     document.getElementById(id).style.display = 'none';
 }
 
-// Configurar modal de Agregar
+
 function setupAddModal() {
     modalTitle.textContent = 'Agregar Empleado';
-    document.getElementById("employeeIdField").value ="";
+    document.getElementById("employeeIdField").value = "";
     document.getElementById("names").value = "";
-    document.getElementById("lastName").value ="";
-    document.getElementById("dni").value ="";
+    document.getElementById("lastName").value = "";
+    document.getElementById("dni").value = "";
     document.getElementById("email").value = "";
     document.getElementById("position").value = "";
     document.getElementById("salary").value = "";
@@ -33,12 +29,10 @@ function setupAddModal() {
 }
 
 
-
-// --- Event Listeners ---
 document.getElementById('btnAddEmployee').addEventListener('click', setupAddModal);
 
-// Cerrar modal al hacer clic fuera
-window.onclick = function(event) {
+
+window.onclick = function (event) {
     if (event.target == employeeModal) {
         closeModal('employeeModal');
     }
@@ -48,7 +42,7 @@ window.onclick = function(event) {
 }
 
 document.querySelectorAll(".btn-edit").forEach(button => {
-    button.addEventListener("click", function() {
+    button.addEventListener("click", function () {
         const employeeId = this.getAttribute("data-id");
 
         fetch(`/employees/employee/${employeeId}`)
@@ -57,7 +51,7 @@ document.querySelectorAll(".btn-edit").forEach(button => {
                 modalTitle.textContent = 'Editar Empleado';
                 showModal('employeeModal');
 
-                // Completar inputs del formulario
+
                 document.getElementById("employeeIdField").value = data.idEmployee;
                 document.getElementById("names").value = data.names;
                 document.getElementById("lastName").value = data.lastName;

@@ -1,4 +1,3 @@
-// --- Obtener datos desde la API ---
 async function getDataApi() {
     try {
         const response = await fetch("http://localhost:8080/employees/data");
@@ -9,23 +8,23 @@ async function getDataApi() {
     }
 }
 
-// --- Obtener empleados (solo API real) ---
+
 async function getEmployees() {
     return await getDataApi();
 }
 
-// --- Lógica de Reportes y Datos ---
+
 async function getReportData() {
     const employees = await getEmployees(); // Espera datos reales
 
-    // Contar empleados por departamento
+
     const deptCounts = employees.reduce((acc, employee) => {
         const deptName = employee.department?.name || "Sin departamento";
         acc[deptName] = (acc[deptName] || 0) + 1;
         return acc;
     }, {});
 
-    // Simulación temporal de asistencia hasta que lo conectes a tu backend real
+
     const attendanceData = {
         present: 45,
         absent: 3,
@@ -40,12 +39,11 @@ async function getReportData() {
     };
 }
 
-// --- Renderizar KPIs ---
+
 function renderMetrics(data) {
     document.getElementById('totalEmployees').textContent = data.totalEmployees;
 }
 
-// --- Gráfico: Empleados por Departamento ---
 function renderDeptChart(labels, data) {
     const ctx = document.getElementById('deptChart').getContext('2d');
 
@@ -77,7 +75,6 @@ function renderDeptChart(labels, data) {
     });
 }
 
-// --- Gráfico: Estado Asistencia ---
 function renderAttendanceChart(attendanceData) {
     const ctx = document.getElementById('attendanceChart').getContext('2d');
 
@@ -106,7 +103,7 @@ function renderAttendanceChart(attendanceData) {
     });
 }
 
-// --- Inicialización ---
+
 window.onload = async function () {
     const reportData = await getReportData();
 
