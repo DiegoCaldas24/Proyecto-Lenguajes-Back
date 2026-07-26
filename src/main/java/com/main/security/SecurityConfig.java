@@ -17,12 +17,12 @@ public class SecurityConfig {
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/error/**").permitAll()
                         .requestMatchers("/styles/**", "/scripts/**", "/login", "/registerAttendance", "/registerAttendance/**").permitAll()
 
                         .requestMatchers("/reports", "/").hasAnyRole("ADMINISTRADOR", "USUARIO", "TRABAJADOR")
 
                         .requestMatchers("/employees", "/employees/**").hasAnyRole("ADMINISTRADOR")
-
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
